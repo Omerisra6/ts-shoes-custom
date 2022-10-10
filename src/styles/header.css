@@ -1,0 +1,113 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 94vw;
+    height: 10vh;
+    padding: 0 2vw;
+    position: sticky;
+}
+
+.left-header{
+    display: flex;   
+}
+
+.logo-text{
+    color: var( --light-text-color );
+    font-size: var( --md-font-size );
+    font-weight: bold;
+}
+
+.navigation{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: inherit;
+    width: 20vw;
+    list-style-type: none;
+    color: var( --light-text-color );
+    font-size: var( --sm-font-size );
+    font-style: italic;
+}
+
+.navigation > li{
+    position: relative;
+}
+
+.nav-button::after{
+    content: "";
+    display: block;
+    width: 0%;
+    height: 0.3vh;
+    border-color: var( --white );
+    background-color: var( --light-orange);
+    text-align: left;
+    visibility:hidden;
+    transition: 0.7s width ease, 0.7s visibility ease;
+    position: absolute;
+    bottom: -0.7vh;
+}
+
+.nav-button:hover::after{
+    width: 100%;
+    visibility: visible;
+}
+
+.nav-button:hover{
+    color: var( --light-orange );
+}
+
+
+.user-actions{
+    display: flex;
+    align-items: center;
+    color: var( --light-text-color );
+    font-size: var( --md-font-size );
+    width: 11vw;
+    gap: 1vw;
+}
+
+.user-actions > *{
+    cursor: pointer;
+}
+
+.user-actions > *:hover{
+    color: var( --white )
+}
+
+.profile-border:hover{
+
+    transform: scale(1.1);
+}
+
+.cart{
+    margin-right: auto;
+}
+
+.profile{
+    width: 1.4vw;
+}
+
+.profile-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6vw;
+    height: 1.6vw;
+    background-color: var( --white );
+    border-radius: 50%;
+}
+
+.profile-border{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 2vw;
+    height: 2vw;
+    border-radius: 50%;
+    background: linear-gradient(90deg, rgba(198,94,120,1) 10%, rgba(190,97,121,1) 100%);
+    background:  -moz-linear-gradient(90deg, rgba(198,94,120,1) 10%, rgba(190,97,121,1) 100%);
+    transition: all 0.5s ease;
+    transform: scale(1);
+}
