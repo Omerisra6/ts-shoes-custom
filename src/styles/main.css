@@ -26,8 +26,8 @@ body{
     margin-top: -10vh;
 }
 
-svg{
-   width: 40vw; 
+object{
+    width: 40vw; 
 }
 
 .product-name{
@@ -172,6 +172,10 @@ svg{
     padding: 3vh 1vw;
 }
 
+.color-selector-input{
+    display: none;
+}
+
 .color-container{
     z-index: 100;
     position: relative;
@@ -205,8 +209,15 @@ svg{
     visibility: visible;
 }
 
-.color-container:hover{
+.color-container.checked{
+    filter: brightness( 70% );
+}
 
+.color-container.checked > .check-color{
+    visibility: visible;
+}
+
+.color-container:hover{
     filter: brightness( 70% );
 }
 
