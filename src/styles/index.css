@@ -5,15 +5,25 @@
     font-family: rubik;
 }
 
+*:focus {
+    outline: none;
+}
+
 :root{
     --black: #0000;
     --white: #ffff;
+    --blue: #0284F5;
     --light-orange: #E5C150;
+    --lighter-orange: #fff5d8;
     --light-text-color: #D9D9D9;
+    --dark-text-color: #535353;
     --light-purple: #867D95;
     --light-pink: #BB4262;
     --dark-purple: #191733;
     --dark-blue: #050D2E;
+    --grey: #959595;
+    --light-grey: #BABABA;
+    --light-blue: #F2FAFF;
 
     --xs-font-size: 0.6vw;
     --sm-font-size: 0.8vw;
@@ -21,9 +31,11 @@
     --lg-font-size: 1.5vw;
     --xl-font-size: 2vw;
     --xxl-font-size: 7vw;
-
 }
 
+.material-icons.xs-icon{
+    font-size: var( --sm-font-size );
+}
 
 .material-icons.sm-icon{
     font-size: var( --md-font-size );

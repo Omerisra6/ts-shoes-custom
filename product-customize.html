@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/styles/index.css">
+    <link rel="stylesheet" href="./src/styles/header.css">
+    <link rel="stylesheet" href="./src/styles/product-customize.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="header">
+
+        <div class="left-header">
+
+           <div class="logo-text">UNICICKS</div>
+
+            <ul class="navigation">
+
+                <li>
+                    <a class="nav-button" href="\overview">OVERVIEW</a>
+                </li>
+
+                <li>
+                    <a class="nav-button" href="\price">PRICE</a>
+                </li>
+
+                <li>
+                    <a class="nav-button" href="\shipping">SHIPPING</a>
+                </li>
+                
+                <li>
+                    <a class="nav-button" href="\contact-us">CONTACT US</a>
+                </li>
+
+            </ul>
+
+        </div>
+        
+        <div class="user-actions">
+
+            <div class="search-product-search-results-container">
+                
+                <div class="search-product-container">
+
+                    <input type="text" class="search-product-input" placeholder="Search product...">
+                    <span class="material-icons md-icon search-icon">search</span>
+        
+                </div>
+
+                <div class="search-results-container invisible">
+                    
+                    <div class="search-results-top">
+
+                        <div class="products-text">products</div>
+                        <span class="results-count">1</span>
+
+                    </div>
+
+                </div>
+                
+            </div>
+            
+            <span class="material-icons md-icon likes">favorite</span>
+            <span class="material-icons md-icon cart">shopping_bag</span>
+
+            <div class="profile-border">
+                <div class="profile-container">
+                    <img class="profile" src="./src/assets/user-icon.png"/>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+
+    <div class="product-container">
+
+        <div class="customize-container">
+
+            <div class="product-view" data-productId="1">
+
+                <div class="product-name">AIR JORDAN ONE</div>
+
+                <div class="product-image">
+                    <object id="product-svg" data="" type="image/svg+xml"></object>
+                </div>
+
+            </div>
+
+            <div class="customize-actions">
+                
+                <div class="rotate-and-start-over">
+
+                    <div class="rotate-container"> 
+                        <span class="rotate-text">TAP TO ROTATE</span>
+                        <span class="material-icons sm-icon rotate-left rotate-icon">redo</span>
+                        <span class="material-icons sm-icon rotate-right rotate-icon">undo</span>
+                    </div>
+
+                    <div class="start-over-container">
+                        <span class="start-over-text">START OVER</span>
+                        <span class="material-icons sm-icon start-over-icon">restart_alt</span>
+                    </div>
+
+                </div>
+
+                <div class="color-platte">
+
+                    <div class="color-platte-menu">
+                        
+                        <div class="color-menu-title-container">
+
+                            <span class="material-icons md-icon color-platte-menu-icon">menu</span>
+                            <span class="colors-title-text">QUATERS</span>
+                            
+                            <div class="next-prev-color-options">
+
+                                <span class="material-icons md-icon color-platte-prev">play_arrow</span>
+                                <span class="material-icons md-icon color-platte-next">play_arrow</span>
+
+                            </div>
+                        </div>
+
+                        <div class="color-types-list">
+
+                            <div class="color-type-container">
+                                <span class="color-type-text">SOLID</span>
+                            </div>
+
+                            <div class="color-type-container">
+                                <span class="color-type-text">PATTERN</span>
+                            </div>
+
+                            <div class="color-type-container">
+                                <span class="color-type-text">MATERIAL</span>
+                            </div>
+                            
+                            <div class="color-type-container">
+                                <span class="color-type-text">ADD OWN</span>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+
+                    <div class="colors-list-container">
+
+                        <div class="color-list-with-arrows">
+                            <span class="material-icons sm-icon prev-colors">arrow_back_ios</span>
+
+                            <div class="colors-list">
+
+                                <input type="radio" class="color-selector-input" name="color"  id="#FFEFC0" value="#FFEFC0" checked>
+                                <label class="color-container  checked" for="#FFEFC0" style="--col: #FFEFC0">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+                                
+                                <input type="radio" class="color-selector-input" name="color"  id="#F7F670" value="#F7F670">
+                                <label class="color-container" for="#F7F670" style="--col: #F7F670">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+
+                                <input type="radio" class="color-selector-input" name="color"  id="#B5FFC0" value="#B5FFC0">
+                                <label class="color-container" for="#B5FFC0" style="--col: #B5FFC0">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+
+                                <input type="radio" class="color-selector-input" name="color"  id="#15695A" value="#15695A">
+                                <label class="color-container" for="#15695A" style="--col: #15695A">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+
+                                <input type="radio" class="color-selector-input" name="color"  id="#77F6B4" value="#77F6B4">
+                                <label class="color-container" for="#77F6B4" style="--col: #77F6B4">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+
+                                <input type="radio" class="color-selector-input" name="color"  id="#9AD9F6" value="#9AD9F6">
+                                <label class="color-container" for="#9AD9F6" style="--col: #9AD9F6">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+
+                                <input type="radio" class="color-selector-input" name="color"  id="#33BBEA" value="#33BBEA">
+                                <label class="color-container" for="#33BBEA" style="--col: #33BBEA">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+
+                                <input type="radio" class="color-selector-input" name="color"  id="#00A0E5" value="#00A0E5">
+                                <label class="color-container" for="#00A0E5" style="--col: #00A0E5">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+
+                                <input type="radio" class="color-selector-input" name="color"  id="#0B49FF" value="#0B49FF">
+                                <label class="color-container" for="#0B49FF" style="--col: #0B49FF">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+
+                                <input type="radio" class="color-selector-input" name="color" id="#A894FF" value="#A894FF">
+                                <label class="color-container" for="#A894FF" style="--col: #A894FF">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+
+                                <input type="radio" class="color-selector-input" name="color"  id="#6B49FF" value="#6B49FF">
+                                <label class="color-container" for="#6B49FF" style="--col: #6B49FF">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+
+                                <input type="radio" class="color-selector-input" name="color"  id="#4526c9" value="#4526c9">
+                                <label class="color-container" for="#4526c9" style="--col: #4526c9">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+
+                                <input type="radio" class="color-selector-input" name="color" id="#5b49a7" value="#5b49a7">
+                                <label class="color-container" for="#5b49a7" style="--col: #5b49a7">
+
+                                    <span class="material-icons md-icon check-color">check</span>
+
+                                </label>
+                                
+
+                            </div>
+
+                            <span class="material-icons sm-icon next-colors">arrow_forward_ios</span>
+                        </div>
+
+                        <div class="color-list-nav">
+                            <span class="color-list-nav-dot"></span>
+                            <span class="color-list-nav-dot"></span>
+                            <span class="color-list-nav-dot"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        
+        </div>
+
+        <div class="product-description-and-actions">
+
+            <div class="description">
+
+                <p class="specific-description"><span class="lets-customize-text">Lets customize</span> the popular and exiting shoe of all time, Air Jordan 1.</p> 
+                <p class="general-description">You can customize the shoe by the touch of your hand, be creative, do it YOUR way.</p>
+
+            </div>
+
+            <div class="product-actions">
+
+                <div class="add-to-bag-button product-action-button">
+                    <span class="add-to-bag-text">ADD TO BAG</span>
+                    <span class="material-icons lg-icon bag-icon">shopping_bag</span>
+                </div>
+
+                <div class="save-product-button product-action-button">
+                    <span class="save-product-text">SAVE</span>
+                    <span class="material-icons lg-icon save-icon">favorite</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+    <script type="module" src="./dist/src/scripts/product-customize.js" ></script>
+</html>

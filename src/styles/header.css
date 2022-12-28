@@ -63,20 +63,129 @@
     align-items: center;
     color: var( --light-text-color );
     font-size: var( --md-font-size );
-    width: 11vw;
     gap: 1vw;
 }
 
-.user-actions > *{
+.user-actions > span{
     cursor: pointer;
 }
 
-.user-actions > *:hover{
+.user-actions > span:hover{
     color: var( --white )
 }
 
-.profile-border:hover{
+.search-product-search-results-container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 1vh;
+    background: transparent;
+}
 
+.search-product-container{
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0.5vh 0.5vw;
+    height: 3.5vh;
+    background-color: var( --white );
+    border-radius: 5px;
+    border: none;
+}
+
+.search-product-input{
+    border-radius: 3px;
+    border: none;
+    width: 13vw;
+    font-size:  var( --sm-font-size );
+    color: var( --dark-text-color );
+}
+
+.search-icon{
+    border-radius: 50%;
+    color: var( --grey );
+}
+
+.search-results-container{
+    position: absolute;
+    top: 5.25vh;
+    width: 100%;
+    background-color: var( --white );
+    border-radius: 5px; 
+}
+
+.invisible{
+    visibility: hidden;
+}
+
+.search-results-top{
+
+    display: flex;
+    gap: 0.25vw;
+    padding: 0.5vh 0.5vw;
+    font-size: var( --sm-font-size );
+    color: var( --light-grey );
+}
+
+.results-count{
+    text-align: center;
+    background: radial-gradient(circle, rgba(236,236,236,1) 50%, rgba(247,247,247,1) 100%); 
+    border-radius: 50%;
+    border: 1px solid #E9E9E9;
+    font-size: var( --xs-font-size );
+    width: 1vw;
+    height: 0.75vw;
+}
+
+.search-result{
+    display: flex;
+    justify-content: flex-start;
+    gap: 1vw;
+    align-items: center;
+    padding: 0.5vh 0.5vw;
+    margin: 0.5vh 0.5vw;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.search-result:hover{
+    background-color: var( --light-blue );
+}
+
+.search-result:hover > .choose-result-icon{
+    visibility: visible;
+}
+.product-image-result{
+    width: 4vw;
+}
+
+.product-name-and-company-result{
+    display: flex;
+    flex-direction: column;
+    gap: 0.20vh;
+    font-size: var( --sm-font-size );
+    color: var( --light-text-color );
+    margin-right: auto;
+}
+
+.product-name-result{
+    font-size: var( --sm-font-size );
+    color: var( --dark-text-color );
+}
+
+.choose-result-icon{
+    color: var( --blue );
+    visibility: hidden;
+} 
+
+.no-products-text{
+    padding: 1vh 0.5vw;
+    font-size: var( --sm-font-size );
+    color: var( --dark-text-color );
+}
+
+
+.profile-border:hover{
     transform: scale(1.1);
 }
 
