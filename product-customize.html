@@ -51,21 +51,31 @@
         
                 </div>
 
-                <div class="search-results-container invisible">
+                <div class="search-results-container">
                     
                     <div class="search-results-top">
 
-                        <div class="products-text">products</div>
-                        <span class="results-count">1</span>
-
+                        
                     </div>
 
                 </div>
                 
             </div>
             
-            <span class="material-icons md-icon likes">favorite</span>
-            <span class="material-icons md-icon cart">shopping_bag</span>
+            <div class="saved-products-container">
+
+                <span class="material-icons md-icon saved-products-icon">favorite</span>
+
+                <div class="saved-products-list invisible">
+                    
+                </div>
+                
+            </div>
+            
+            <div class="cart-container">
+                <span class="material-icons md-icon cart">shopping_bag</span>
+                <div class="cart-products-count">0</div>
+            </div>
 
             <div class="profile-border">
                 <div class="profile-container">
@@ -82,7 +92,7 @@
 
         <div class="customize-container">
 
-            <div class="product-view" data-productId="1">
+            <div class="product" data-productId="1">
 
                 <div class="product-name">AIR JORDAN ONE</div>
 
@@ -293,5 +303,5 @@
 
 
 </body>
-    <script type="module" src="./dist/src/scripts/product-customize.js" ></script>
+    <script type="module" src="./dist/src/scripts/pages/product-customize.js" ></script>
 </html>

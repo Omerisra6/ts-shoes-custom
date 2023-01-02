@@ -1,7 +1,9 @@
 import { Product  } from "../../products.js";
 import { searchProducts } from "../db-helpers.js";
 import { debounce, _  } from "../helpers.js"; 
-import { productView } from "../view-components/search-result.js";
+import { NoProductsMessage } from "../view-components/no-product-found-message.js";
+import { ProductView } from "../view-components/product-view.js";
+import { updateCartProductsCount, updateSavedProductsList } from "./header-helpers.js";
 
 const resultsContainer: HTMLDivElement = _( '.search-results-container' )!
 const searchProductInput: HTMLInputElement = _( '.search-product-input' )!
@@ -9,6 +11,8 @@ const searchProductInput: HTMLInputElement = _( '.search-product-input' )!
 export function attachHeaedrListeners( )
 {
     searchProductInput.addEventListener( 'keyup', debounce( () => { searchInputOnChange() } ) )
+    updateSavedProductsList()
+    updateCartProductsCount()
 }
 
 function searchInputOnChange() 
@@ -30,13 +34,13 @@ function appendSearchResults( searchResults: Array< Product > )
 
     if( searchResults.length === 0 )
     {
-        resultsContainer.innerHTML = '<div class="no-products-text">No products found<div>'
-        return
+        const noProductsElement: HTMLDivElement = NoProductsMessage()
+        resultsContainer.append( noProductsElement ) 
     }
 
     searchResults.forEach( ( result: Product ) => {
 
-        resultsContainer.appendChild( productView( result ) )
+        resultsContainer.appendChild( ProductView( result ) )
     })
 }
 

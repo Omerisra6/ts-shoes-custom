@@ -8,7 +8,7 @@ body{
     cursor: pointer;
 }
 
-.customize-container, .product-view{
+.customize-container, .product{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +16,7 @@ body{
 }
 
 
-.product-view{
+.product{
     padding: 2vh 0;
     position: relative;
     gap: 5vh;
@@ -299,3 +299,6 @@ object{
     color: var( --light-pink );
 }
 
+.product-saved{
+    color: var( --light-pink );
+}

@@ -1,5 +1,4 @@
 import { Product } from "../products.js"
-import { currentProduct } from "./product-customize.js"
 
 export function _( selector: any ): any
 {
@@ -28,88 +27,68 @@ export const debounce = (fn: Function, ms = 300) => {
     };
 };
 
-
-export const loadProduct: Function = ( product: Product ) => {
-    
-    const { id, company, name, svgFileName }                = product
-    const productView: HTMLDivElement              = _( '.product-view' )!
-    const productName: HTMLElement                 = _( '.product-name' )!
-    const productSvgObject: HTMLObjectElement      = _( '#product-svg' )!
-
-    productView.dataset.productId = id
-    productName.innerHTML = name
-    productSvgObject.data = 'src/assets/products/' + svgFileName
-
-    currentProduct.id = id
-    currentProduct.company = company
-    currentProduct.name = name
-    currentProduct.svgFileName = svgFileName
-
-    attachListenersToProduct()
+export function setCookie( cname: string, cvalue: any, exdays: number ) 
+{    
+    const d = new Date();
+    d.setTime( d.getTime() + ( exdays*24*60*60*1000 ) );
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-const attachListenersToProduct: Function = () => {
-
-    _( "#product-svg" )?.addEventListener( "load", function(){
-
-        const productSvgObject: HTMLObjectElement      = _( '#product-svg' )!
-        const startOverIcon: HTMLElement               = _( '.start-over-icon' )!
-        const productSvg                               = productSvgObject?.contentDocument;
-        const paths: NodeListOf<SVGPathElement>        = productSvg?.querySelectorAll( 'path' )!    
-        const pathFillOriginalColors: Array<string>    = [ ...paths ].map( ( path: SVGPathElement ) =>{ return path.getAttribute( 'fill' )! })
-        const colorContainers: NodeListOf<HTMLElement> = _A( '.color-selector-input' )! 
-        let selectedColorInput: HTMLInputElement = _( 'input[name="color"]:checked' )!
-    
-        attachDefaultListeners()
-    
-        function attachDefaultListeners()
+export function getCookie( cname: string ) :string
+{
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent( document.cookie );
+    let ca = decodedCookie.split( ';' );
+    for( let i = 0; i <ca.length; i++ ) 
+    {
+        let c = ca[ i ];
+        while ( c.charAt(0) == ' ' ) 
         {
-            paths?.forEach( ( path: SVGPathElement ) =>{
-    
-                path.addEventListener( 'click', () => {
-                    path.setAttribute( 'style', `fill: ${ selectedColorInput?.value }` )
-                })
-            });
-    
-            startOverIcon?.addEventListener( 'click', () => {
-    
-                restartPathFillColors()
-            })
-
-            colorContainers.forEach( ( colorContainer: HTMLElement ) => {
-
-                colorContainer.addEventListener( 'click', ( event ) => {
-            
-                    if ( event.currentTarget instanceof HTMLInputElement )
-                    { 
-                        selectedColorInput = event.currentTarget
-                        checkSelectedColor()
-                    }
-                })
-            })
-    
-        }
-    
-    
-        function restartPathFillColors(){
-    
-            paths?.forEach( ( path: SVGPathElement, index: number ) => {
-    
-                path.setAttribute( 'style', `fill: ${pathFillOriginalColors[ index ]}`  )
-            });
+            c = c.substring( 1) ;
         }
 
-        function checkSelectedColor(){
-        
-            colorContainers.forEach( ( colorContainer: HTMLElement ) => { 
-        
-                const inputLabel = getElementLabel( colorContainer )            
-                inputLabel.classList.remove( 'checked' )
-            })
-            
-            const selectedInputLabel = _( `label[for='${selectedColorInput.id}']` )
-            selectedInputLabel.classList.add( 'checked' )
+        if ( c.indexOf(name) == 0 ) 
+        {
+            return c.substring(name.length, c.length);
         }
+    }
+    return "";
+}
+
+export function addProductToCookieArray( cname: string, newProduct: Product )
+{
+    const productsCookie: string = getCookie( cname )
+
+    const productsArray: Array< Product > = ! productsCookie ? [] : JSON.parse( productsCookie ) 
+    productsArray.push( newProduct )
         
+    setCookie( cname, JSON.stringify( productsArray ), 1 )
+}
+
+export function removeProductFromCookieArray( cname: string, producyIndex: number )
+{
+    const productsCookie: string = getCookie( cname )
+    const productsArray: Array< Product > = JSON.parse( productsCookie ) 
+
+    productsArray.splice( producyIndex, 1 )
+        
+    setCookie( cname, JSON.stringify( productsArray ), 1 )
+}
+
+export function findProductIndexInCookieArray( cname: string, searchedProduct: Product): number
+{
+    const productsCookie: string = getCookie( cname )
+
+    if ( ! productsCookie ) 
+    {
+        return -1
+    }   
+
+    const productsArray: Array< Product > = JSON.parse( productsCookie ) 
+    
+    return productsArray.findIndex( ( product: Product ) => {
+        
+        return product.id === searchedProduct.id
     })
 }
