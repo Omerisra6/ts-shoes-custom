@@ -59,3 +59,8 @@ export function findProductIndexInCookieArray(cname, searchedProduct) {
         return product.id === searchedProduct.id;
     });
 }
+export function selectFirstInput(inputsContainer) {
+    const colorInputs = inputsContainer.querySelectorAll('input[name="color"]');
+    const firstColorInput = colorInputs[0];
+    firstColorInput.checked = true;
+}

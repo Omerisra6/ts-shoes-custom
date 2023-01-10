@@ -5,7 +5,7 @@ import { NoProductsMessage } from "../view-components/no-product-found-message.j
 import { ProductView } from "../view-components/product-view.js";
 import { updateCartProductsCount, updateSavedProductsList } from "./header-helpers.js";
 
-const resultsContainer: HTMLDivElement = _( '.search-results-container' )!
+const resultsContainer: HTMLDivElement     = _( '.search-results-container' )!
 const searchProductInput: HTMLInputElement = _( '.search-product-input' )!
 
 export function attachHeaedrListeners( )

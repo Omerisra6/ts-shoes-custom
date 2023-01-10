@@ -200,6 +200,14 @@ object{
     border-radius: 2px;
 }
 
+.own-color-label{
+    background-color: #000;
+}
+
+.own-color-label::after{
+    background-color: inherit;
+}
+
 .check-color{
     visibility: hidden;
     color: var( --light-orange );
@@ -301,4 +309,9 @@ object{
 
 .product-saved{
     color: var( --light-pink );
+}
+
+.selected-color-option{
+    color: var( --light-orange );
+    border-bottom: 1px solid var( --light-orange );
 }

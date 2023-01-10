@@ -1,11 +1,11 @@
 import { Product } from "../../products.js"
-import { loadProduct } from "../pages/product-customize-helpers.js"
+import { loadProduct } from "../pages/product-customize/product-customize-helpers.js"
 
 export const ProductView = ( product: Product ): HTMLDivElement => {
 
     const productViewElement: HTMLDivElement = document.createElement( "div" )
     productViewElement.classList.add( 'product-view' )
-    productViewElement.onclick = function(){ loadProduct( product ) }
+    productViewElement.onclick = function(): void{ loadProduct( product ) }
     productViewElement.dataset.resultId = product.id
 
     productViewElement.innerHTML = `

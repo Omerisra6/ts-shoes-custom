@@ -18,6 +18,7 @@ export function updateSavedProductsList(): void
     }
 
     savedProductList.forEach( ( product: Product ) => {
+
         const productViewElement: HTMLDivElement = ProductView( product )
         savedProdtctsListElement.append( productViewElement )
     })

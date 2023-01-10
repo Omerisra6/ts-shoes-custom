@@ -49,6 +49,10 @@
     font-size: var( --xl-font-size );
 }
 
+.none{
+    display: none !important;
+}
+
 a{
     color: var( --white );
 }

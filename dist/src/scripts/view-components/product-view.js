@@ -1,4 +1,4 @@
-import { loadProduct } from "../pages/product-customize-helpers.js";
+import { loadProduct } from "../pages/product-customize/product-customize-helpers.js";
 export const ProductView = (product) => {
     const productViewElement = document.createElement("div");
     productViewElement.classList.add('product-view');

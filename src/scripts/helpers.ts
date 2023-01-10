@@ -92,3 +92,11 @@ export function findProductIndexInCookieArray( cname: string, searchedProduct: P
         return product.id === searchedProduct.id
     })
 }
+
+export function selectFirstInput( inputsContainer: Element )
+{
+    const colorInputs: NodeListOf<Element>  = inputsContainer.querySelectorAll( 'input[name="color"]' )    
+    const firstColorInput: HTMLInputElement = ( colorInputs[ 0 ] as HTMLInputElement )
+    
+    firstColorInput.checked = true    
+}

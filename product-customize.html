@@ -138,19 +138,19 @@
 
                         <div class="color-types-list">
 
-                            <div class="color-type-container">
+                            <div class="color-type-container selected-color-option" id="solid-colors-option">
                                 <span class="color-type-text">SOLID</span>
                             </div>
 
-                            <div class="color-type-container">
+                            <!-- <div class="color-type-container" id="pattern-option">
                                 <span class="color-type-text">PATTERN</span>
                             </div>
 
-                            <div class="color-type-container">
+                            <div class="color-type-container" id="material-option">
                                 <span class="color-type-text">MATERIAL</span>
-                            </div>
+                            </div> -->
                             
-                            <div class="color-type-container">
+                            <div class="color-type-container add-own-button" id="own-color-option">
                                 <span class="color-type-text">ADD OWN</span>
                             </div>
                             
@@ -158,7 +158,7 @@
 
                     </div>
 
-                    <div class="colors-list-container">
+                    <div class="colors-list-container" for="solid-colors-option">
 
                         <div class="color-list-with-arrows">
                             <span class="material-icons sm-icon prev-colors">arrow_back_ios</span>
@@ -269,6 +269,27 @@
                         </div>
                     </div>
 
+                    <div class="colors-list-container own-color-container none" for="own-color-option">
+
+                        <div class="own-color-input-container">
+
+                            <input type="radio" class="own-radio-input color-selector-input none" name="color" value="#000" id="#000">
+                            <input class="own-color-input none" type="color"/>
+                            <label class="color-container own-color-label" for="#000" style="--col: #000">
+
+                                <span class="material-icons md-icon check-color">check</span>
+
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- <div class="colors-list-container pattern-option-container none" for="pattern-option">
+
+                    </div>
+
+                    <div class="colors-list-container material-option-container none" for="material-option">
+
+                    </div> -->
                 </div>
 
             </div>
@@ -303,5 +324,5 @@
 
 
 </body>
-    <script type="module" src="./dist/src/scripts/pages/product-customize.js" ></script>
+    <script type="module" src="./dist/src/scripts/pages/product-customize/product-customize.js" ></script>
 </html>
