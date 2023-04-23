@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/styles/index.css">
+    <link rel="stylesheet" href="../src/styles/header.css">
+    <link rel="stylesheet" href="../src/styles/checkout.css">
+    <link rel="stylesheet" href="../src/styles/components/quantity-input.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Checkout</title>
+</head>
+<body>
+    <div class="header">
+
+        <div class="left-header">
+
+           <div class="logo-text">UNICICKS</div>
+
+            <ul class="navigation">
+
+                <li>
+                    <a class="nav-button" href="\overview">OVERVIEW</a>
+                </li>
+
+                <li>
+                    <a class="nav-button" href="\price">PRICE</a>
+                </li>
+
+                <li>
+                    <a class="nav-button" href="\shipping">SHIPPING</a>
+                </li>
+                
+                <li>
+                    <a class="nav-button" href="\contact-us">CONTACT US</a>
+                </li>
+
+            </ul>
+
+        </div>
+        
+        <div class="user-actions">
+
+            <div class="search-product-search-results-container">
+                
+                <div class="search-product-container">
+
+                    <input type="text" class="search-product-input" placeholder="Search product...">
+                    <span class="material-icons md-icon search-icon">search</span>
+        
+                </div>
+
+                <div class="search-results-container">
+                    
+                    <div class="search-results-top">
+
+                        
+                    </div>
+
+                </div>
+                
+            </div>
+            
+            <div class="saved-products-container">
+
+                <span class="material-icons md-icon saved-products-icon">favorite</span>
+
+                <div class="saved-products-list invisible">
+                    
+                </div>
+                
+            </div>
+            
+            <a class="cart-container" href="checkout.html">
+                <span class="material-icons md-icon cart">shopping_bag</span>
+                <div class="cart-products-count">0</div>
+            </a>
+
+            <div class="profile-border">
+                <div class="profile-container">
+                    <img class="profile" src="../src/assets/user-icon.png"/>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <div class="chekcout-container">
+
+        <div class="checkout-cart-container">
+            <div class="cart-text">Cart</div>
+            <div class="cart-products-container">
+
+            </div>
+        </div>
+
+        <div class="order-summary-container">
+
+            <div class="order-summary-text">Order Summary</div>
+
+            <div class="address-summary">
+
+                <div class="address-from-container">
+
+                    <h3 class="from-text">From:</h3>
+                    <div class="address-from-name">Omer Israeli</div>
+                    <div class="address-from-street">9 Gelber Street</div>
+                    <div class="address-from-city">Jerusalem 0096344, Israel</div>
+                    
+                </div>
+
+                <div class="address-to-container">
+                    
+                    <h3 class="to-text">To:</h3>
+                    <div class="address-to-name">Googleplex</div>
+                    <div class="address-to-street">23/23a 124 King Street</div>
+                    <div class="address-to-city">Sydney 2000, Australia</div>
+
+                </div>
+
+            </div>
+
+            <div class="price-summary">
+                
+                <div class="total-container">
+
+                    <div class="total-text">Total</div>
+                    <div class="total-number"></div>
+
+                </div>
+
+                <div class="summary-buttons-container">
+
+                    <button class="cancel-order-button">Cancel</button>
+                    <button class="confirm-order-button">Order</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+<script type="module" src="../dist/src/scripts/pages/checkout/checkout.js" ></script>
+</html>
