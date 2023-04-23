@@ -35,19 +35,34 @@ export function selectFirstInput( inputsContainer: Element )
 
 export function adjustQuantityValue( inputElement: HTMLInputElement, adjustment: number )
 {
-    inputElement.value += adjustment
+  let numberValue: number      = inputElement.valueAsNumber + adjustment
+  const inputMinNumber: number = parseInt( inputElement.min )
+  const inputMaxNumber: number = parseInt( inputElement.max )
+
+  numberValue = numberValue < inputMinNumber ? inputMinNumber : numberValue
+  numberValue = numberValue > inputMaxNumber ? inputMaxNumber : numberValue
+
+  inputElement.value         = numberValue.toString()
 }
 
-export function countObjectsWithAttribute(arr: Array< { [ key: string] : any } >, key: string, value: any) 
+export function countObjectsWithAttribute( arr: Array< { [ key: string] : any } >, key: string, value: any ) 
 {
     return arr.reduce( ( count, obj ) => {
 
-      if ( obj.hasOwnProperty( key ) && obj[ key ] === value ) 
+      if ( obj[ key ] == value ) 
       {
         return count + 1;
       }
       
       return count;
     }, 0);
-  }
+}
+
+export function getIndexByKey( arr: Array< { [ key: string] : any } >, key: string, value: any ): number
+{
+  return arr.findIndex( ( object ) => {
+        
+    return object[ key ] === value
+  })
+}
   
