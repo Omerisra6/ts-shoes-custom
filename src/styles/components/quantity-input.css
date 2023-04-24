@@ -1,0 +1,55 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    margin: 0 auto;
+    background: #eaeaea;
+    border-radius: 3px;
+    padding: 1vh 1vw;
+}
+  
+.quantity-btn {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    outline: none;
+    margin: 0;
+    padding: 0px 8px;
+    cursor: pointer;
+}
+
+.quantity-btn svg {
+    width: 1vw;
+}
+
+.quantity-input {
+    outline: none;
+    user-select: none;
+    text-align: center;
+    width: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    font-size: var( --md-font-size );
+}
+
+.quantity-input::-webkit-inner-spin-button,
+.quantity-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+} 
