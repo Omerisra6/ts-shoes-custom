@@ -9,13 +9,19 @@
     outline: none;
 }
 
+body{
+    background: rgb(4,25,66);
+    background: linear-gradient(0deg, rgba(4,25,66,1) 0%, rgba(126,51,85,1) 70%, rgba(187,66,98,1) 100%); 
+    height: 100vh;
+}
+
 :root{
-    --black: #0000;
+    --black: #000;
     --white: #ffff;
     --blue: #0284F5;
     --light-orange: #E5C150;
     --lighter-orange: #fff5d8;
-    --light-text-color: #D9D9D9;
+    --light-text-color: #bebdbd;
     --dark-text-color: #535353;
     --light-purple: #867D95;
     --light-pink: #BB4262;
@@ -23,7 +29,12 @@
     --dark-blue: #050D2E;
     --grey: #959595;
     --light-grey: #BABABA;
+    --lighter-grey: #F5F5F5;
     --light-blue: #F2FAFF;
+    --light-green: #D1EEDB;
+    --green: #509D6A;
+
+    --light-border-color: #F5F5F5;
 
     --xs-font-size: 0.6vw;
     --sm-font-size: 0.8vw;
@@ -55,4 +66,19 @@
 
 a{
     color: var( --white );
+}
+
+@media screen and (max-width: 680px) {
+    :root{
+        --xs-font-size: 0.3rem;
+        --sm-font-size: 0.4rem;
+        --md-font-size: 0.6rem;
+        --lg-font-size: 0.75rem;
+        --xl-font-size: 1rem;
+        --xxl-font-size: 3.5rem;
+    }
+
+    .material-icons.md-icon{
+        font-size: var( --xl-font-size );
+    }
 }
