@@ -1,24 +1,24 @@
+import { AppProductsPath } from "../../../../constants.js";
 import { Product } from "../../../products.js"
-import { findProductIndexInCookieArray, getElementLabel, selectFirstInput, _, _A } from "../../helpers.js"
-import { currentProduct } from "./product-customize.js"
+import { getSavedProduct } from "../../db-handlers.js";
+import { getElementLabel, _, _A, selectFirstInput } from "../../helpers.js"
+import { attachListenersToStartOver, attachListenersToSvgPaths } from "./product-customize-listeners.js";
+import { setCurrentProduct } from "./product-customize.js"
 
 export function loadProduct( product: Product ):void
 {
-    const { id, company, name, svgFileName }       = product
+    const { id, name, svgFileName }                = product
     const productView: HTMLDivElement              = _( '.product' )!
     const productName: HTMLElement                 = _( '.product-name' )!
     const productSvgObject: HTMLObjectElement      = _( '#product-svg' )!
 
     productView.dataset.productId = id
-    productName.innerHTML = name
-    productSvgObject.data = 'src/assets/products/' + svgFileName
+    productName.innerHTML         = name
+    productSvgObject.data         = AppProductsPath + svgFileName
 
-    currentProduct.id = id
-    currentProduct.company = company
-    currentProduct.name = name
-    currentProduct.svgFileName = svgFileName
-    
-    const isProductSaved: boolean = findProductIndexInCookieArray( 'saved_products', product ) !== -1
+    setCurrentProduct( product )
+
+    const isProductSaved: boolean = getSavedProduct( product.id ) !== undefined
     toggleSaveProductButtonView( isProductSaved )
     attachListenersToProduct()
 }
@@ -28,38 +28,11 @@ function attachListenersToProduct(): void
     _( "#product-svg" )?.addEventListener( "load", function(){
 
         const productSvgObject: HTMLObjectElement      = _( '#product-svg' )!
-        const startOverIcon: HTMLElement               = _( '.start-over-icon' )!
         const productSvg                               = productSvgObject?.contentDocument;
         const paths: NodeListOf<SVGPathElement>        = productSvg?.querySelectorAll( 'path' )!    
-        const pathFillOriginalColors: Array<string>    = [ ...paths ].map( ( path: SVGPathElement ) =>{ return path.getAttribute( 'fill' )! })
 
-        attachDefaultListeners()
-    
-        function attachDefaultListeners()
-        {
-            paths?.forEach( ( path: SVGPathElement ) =>{
-    
-                path.addEventListener( 'click', () => {
-
-                    let selectedColorInput: HTMLInputElement = _( 'input[name="color"]:checked' )!
-                    path.setAttribute( 'style', `fill: ${ selectedColorInput?.value }` )
-                })
-            });
-    
-            startOverIcon?.addEventListener( 'click', () => {
-    
-                restartPathFillColors()
-            })
-        }
-    
-        function restartPathFillColors()
-        {
-            paths?.forEach( ( path: SVGPathElement, index: number ) => {
-    
-                path.setAttribute( 'style', `fill: ${pathFillOriginalColors[ index ]}`  )
-            });
-        }
-        
+        attachListenersToSvgPaths( paths )
+        attachListenersToStartOver( paths )       
     })
 }
 
@@ -94,24 +67,37 @@ export function toggleColorMenu( event: Event )
         return
     }
 
-    const currentButton: HTMLDivElement   = ( event.currentTarget as HTMLDivElement )
-    const colorMenu: HTMLDivElement       = _( '.color-types-list' )
-    const colorOptions: Array< Element > = [ ...colorMenu.children ]
+    const currentOption: HTMLDivElement          = ( event.currentTarget as HTMLDivElement )
+    const colorMenu: HTMLDivElement              = _( '.color-types-list' )
+    const colorOptions: Array< HTMLDivElement >  = [ ...colorMenu.children  ] as Array< HTMLDivElement >
 
-    colorOptions.forEach( ( colorOption: Element ) => {
+    colorOptions.forEach( ( colorOption: HTMLDivElement ) => {
 
-        const isSelectedOption: boolean = colorOption == currentButton 
-        colorOption.classList.toggle( 'selected-color-option', isSelectedOption )
-
-        const colorOptionId: string            = colorOption.id
-        const colorOptionField: HTMLDivElement = _( `div[for="${ colorOptionId }"]` )
-        
-        colorOptionField.classList.toggle( 'none', ! isSelectedOption )
-
-        if ( isSelectedOption ) 
-        {
-            selectFirstInput( colorOptionField )
-            checkSelectedColor()
-        }
+        setOptionView( colorOption, currentOption )
     })    
+}
+
+function setOptionView( colorOption: HTMLDivElement, currentOption: HTMLDivElement )
+{
+    const isSelectedOption: boolean = colorOption == currentOption 
+    colorOption.classList.toggle( 'selected-color-option', isSelectedOption )
+
+    const colorOptionId: string            = colorOption.id
+    const colorOptionField: HTMLDivElement = _( `div[for="${ colorOptionId }"]` )
+    
+    colorOptionField.classList.toggle( 'none', ! isSelectedOption )
+
+    if ( ! isSelectedOption ) 
+    {
+        return
+    }
+
+    selectFirstInput( colorOptionField )
+    checkSelectedColor()
+}
+
+export function selectFirstColorInput( ) 
+{
+    const firstColorList: HTMLDivElement = _( '[for="solid-colors-option"]')    
+    selectFirstInput( firstColorList )
 }

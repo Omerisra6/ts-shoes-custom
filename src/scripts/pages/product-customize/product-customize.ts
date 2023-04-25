@@ -1,90 +1,46 @@
 import { Product } from "../../../products.js";
-import { updateCartProductsCount, updateSavedProductsList } from "../../components/header-helpers.js";
-import { attachHeaedrListeners } from "../../components/header.js";
-import { getProduct } from "../../db-helpers.js";
-import { addProductToCookieArray, findProductIndexInCookieArray, removeProductFromCookieArray, selectFirstInput, _, _A } from "../../helpers.js";
-import { checkSelectedColor, loadProduct, toggleColorMenu, toggleSaveProductButtonView } from "./product-customize-helpers.js";
+import { attachHeaedrListeners } from "../../components/header/header.js";
+import { getProduct } from "../../db-handlers.js";
+import { _, _A } from "../../helpers.js";
+import { loadProduct, selectFirstColorInput } from "./product-customize-helpers.js";
+import 
+{ 
+    attachListenersToCartButton, attachListenersToColorContainers, attachListenersToColorOptions,
+    attachListenersToOwnColorInput, attachListenersToOwnColorLabel, attachListenersToSaveProduct 
+} from "./product-customize-listeners.js";
 
-const colorContainers: NodeListOf<HTMLElement> = _A( '.color-selector-input' )! 
-const saveProductButton: HTMLDivElement = _( '.save-product-button' )
-const addToCartButton: HTMLDivElement   = _( '.add-to-bag-button' )
-const colorMenu: HTMLDivElement         = _( '.color-types-list' )
-const ownColorLabel: HTMLLabelElement   = _( '.own-color-label' )
-const ownColorInput: HTMLInputElement   = _ ( '.own-color-input' )
-const ownColorRadioInput: HTMLInputElement   = _ ( '.own-radio-input' )
 
-export let currentProduct: Product = { id: "0", company: "", name: "", svgFileName: "" }
+export let currentProduct: Product = { id: "0", company: "", name: "", svgFileName: "", price: 0 }
 
-loadProduct( getProduct( 1 ) )
-selectFirstColorInput()
 attachHeaedrListeners()
+loadProduct( getCurrentProduct() )
+selectFirstColorInput()
 attachProductCustomizeListener()
 
-function selectFirstColorInput( ) 
+function getCurrentProduct( ):Product 
 {
-    const firstColorList: HTMLDivElement = _( '[for="solid-colors-option"]')    
-    selectFirstInput( firstColorList )
+    const url: URL = new URL( window.location.href )    
+    const currentProductId: number = url.searchParams.get( 'id' ) ? parseInt( url.searchParams.get( 'id' ) ) : 1
+
+    return getProduct( currentProductId )
 }
 
 function attachProductCustomizeListener()
 {
-    colorContainers.forEach( ( colorContainer: HTMLElement ) => {
+    attachListenersToSaveProduct()
 
-        colorContainer.addEventListener( 'click', ( event ) => {
-    
-            if ( event.currentTarget instanceof HTMLInputElement )
-            {   
-                checkSelectedColor()
-            }
-        })
-    })
+    attachListenersToColorContainers()
 
-    saveProductButton.addEventListener( 'click', () =>{ 
+    attachListenersToCartButton()
 
-        const productIndex: number = findProductIndexInCookieArray( 'saved_products', currentProduct )
+    attachListenersToColorOptions()
 
-        if ( productIndex !== -1 ) 
-        {
-            removeProductFromCookieArray( 'saved_products', productIndex )
-            toggleSaveProductButtonView( false )
-            updateSavedProductsList()
-            return
-        }
+    attachListenersToOwnColorLabel()
 
-        addProductToCookieArray( 'saved_products', currentProduct )     
-        toggleSaveProductButtonView( true )
-        updateSavedProductsList()
-    })
+    attachListenersToOwnColorInput()
+}
 
-
-    addToCartButton.addEventListener( 'click', () =>{
-
-        const productWithCustomize:Product    =  currentProduct
-        const productSvg                      = _( '#product-svg' )  
-        productWithCustomize.customization    = productSvg
-
-        addProductToCookieArray( 'cart_products', productWithCustomize )
-        updateCartProductsCount()
-    })
-
-    const colorOptions: Array< Element > = [ ...colorMenu.children ]
-    colorOptions.forEach( ( colorOption: Element ) => {
-
-        colorOption.addEventListener( 'click', ( e: Event ) => {
-            toggleColorMenu( e )
-        })
-    })
-
-    ownColorLabel.addEventListener( 'click', () => {
-
-        ownColorInput.click()
-    })
-
-    ownColorInput.addEventListener( 'change', () => {
-
-       ownColorRadioInput.value = ownColorInput.value 
-       ownColorRadioInput.id    = ownColorInput.value 
-       ownColorLabel.htmlFor    = ownColorInput.value 
-       ownColorLabel.style.backgroundColor     =  ownColorInput.value
-    })    
+export function setCurrentProduct( product: Product )
+{
+    currentProduct = product
 }
