@@ -1,15 +1,15 @@
+import { AppProductsPath } from "../../../constants.js"
 import { Product } from "../../products.js"
-import { loadProduct } from "../pages/product-customize/product-customize-helpers.js"
 
 export const ProductView = ( product: Product ): HTMLDivElement => {
 
     const productViewElement: HTMLDivElement = document.createElement( "div" )
     productViewElement.classList.add( 'product-view' )
-    productViewElement.onclick = function(): void{ loadProduct( product ) }
+    productViewElement.onclick = function(): void{ window.location.href  = `/pages/product-customize.html?id=${ product.id }` }
     productViewElement.dataset.resultId = product.id
 
     productViewElement.innerHTML = `
-        <object class="product-view-image" data="./src/assets/products/${ product.svgFileName }" type="image/svg+xml"></object>
+        <object class="product-view-image" data="${ AppProductsPath + product.svgFileName }" type="image/svg+xml"></object>
         
         <div class="product-view-name-and-company">
 
