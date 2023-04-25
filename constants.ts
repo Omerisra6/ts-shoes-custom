@@ -1,0 +1,1 @@
+export const AppProductsPath = '../src/assets/products/'
