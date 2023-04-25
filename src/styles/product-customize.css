@@ -1,7 +1,8 @@
 body{
     background: rgb(4,25,66);
     background: linear-gradient(0deg, rgba(4,25,66,1) 0%, rgba(126,51,85,1) 70%, rgba(187,66,98,1) 100%); 
-    height: 110%;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .material-icons{
@@ -20,6 +21,7 @@ body{
     padding: 2vh 0;
     position: relative;
     gap: 5vh;
+    z-index: 0;
 }
 
 .product-image{
@@ -314,4 +316,50 @@ object{
 .selected-color-option{
     color: var( --light-orange );
     border-bottom: 1px solid var( --light-orange );
+}
+
+@media screen and (max-width: 800px) {
+    html{
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .product-name{
+        width: 75vw;
+    }
+
+    object{
+        width: 60vw;
+    }
+
+    .color-menu-title-container{
+        width: 30vw;
+    }
+
+    .product-description-and-actions{
+        padding: 7vh 2vw;
+    }
+
+    .color-platte{
+        width: 65vw;
+    }
+
+    .colors-list-container{
+        width: 65vw;
+        padding: 0;
+    }
+
+    .color-container, .color-container::after{
+        width: 3.8vw;
+        height: 3.8vw;
+    }
+
+    .prev-colors, .next-colors{
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .color-list-nav{
+        padding-bottom: 1vh;
+    }
 }
