@@ -18,6 +18,7 @@ export function attachHeaedrListeners( )
 function attachListenersToSearchInput()
 {
     searchProductInput.addEventListener( 'keyup', debounce( () => { searchInputOnChange() } ) )
+    document.addEventListener( 'click', () => resultsContainer.classList.add( 'invisible' ) )
 }
 
 function searchInputOnChange() 
