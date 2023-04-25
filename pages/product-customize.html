@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/styles/index.css">
-    <link rel="stylesheet" href="./src/styles/header.css">
-    <link rel="stylesheet" href="./src/styles/product-customize.css">
+    <link rel="stylesheet" href="../src/styles/index.css">
+    <link rel="stylesheet" href="../src/styles/header.css">
+    <link rel="stylesheet" href="../src/styles/product-customize.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Document</title>
 </head>
@@ -72,14 +72,14 @@
                 
             </div>
             
-            <div class="cart-container">
+            <a class="cart-container" href="checkout.html">
                 <span class="material-icons md-icon cart">shopping_bag</span>
                 <div class="cart-products-count">0</div>
-            </div>
+            </a>
 
             <div class="profile-border">
                 <div class="profile-container">
-                    <img class="profile" src="./src/assets/user-icon.png"/>
+                    <img class="profile" src="../src/assets/user-icon.png"/>
                 </div>
             </div>
             
@@ -141,14 +141,6 @@
                             <div class="color-type-container selected-color-option" id="solid-colors-option">
                                 <span class="color-type-text">SOLID</span>
                             </div>
-
-                            <!-- <div class="color-type-container" id="pattern-option">
-                                <span class="color-type-text">PATTERN</span>
-                            </div>
-
-                            <div class="color-type-container" id="material-option">
-                                <span class="color-type-text">MATERIAL</span>
-                            </div> -->
                             
                             <div class="color-type-container add-own-button" id="own-color-option">
                                 <span class="color-type-text">ADD OWN</span>
@@ -249,7 +241,7 @@
 
                                 </label>
 
-                                <input type="radio" class="color-selector-input" name="color" id="#5b49a7" value="#5b49a7">
+                                <input type="radio" class="color-selector-input" name="color" id="#5b49a7" value="#5b49a7" checked>
                                 <label class="color-container" for="#5b49a7" style="--col: #5b49a7">
 
                                     <span class="material-icons md-icon check-color">check</span>
@@ -324,5 +316,5 @@
 
 
 </body>
-    <script type="module" src="./dist/src/scripts/pages/product-customize/product-customize.js" ></script>
+    <script type="module" src="../dist/src/scripts/pages/product-customize/product-customize.js" ></script>
 </html>
