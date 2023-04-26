@@ -1,1 +1,1 @@
-export const AppProductsPath = '../src/assets/products/'
+export const AppProductsPath = window.location.origin + '/src/assets/products/'
