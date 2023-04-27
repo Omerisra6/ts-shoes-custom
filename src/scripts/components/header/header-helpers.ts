@@ -4,21 +4,21 @@ import { _ } from "../../helpers.js"
 import { NoSavedMessage } from "../../view-components/no-saved-products-message.js"
 import { ProductView } from "../../view-components/product-view.js"
 
-export function updateSavedProductsList(): void
+export function updateSavedProductsList()
 {
     const savedProdtctsListElement: HTMLDivElement  = _( '.saved-products-list' )    
-    const savedProductList: Array< Product >        = getSavedProducts()
+    const savedProductList                          = getSavedProducts()
     
     savedProdtctsListElement.innerHTML              = ''
 
     if ( savedProductList.length === 0 ) 
     {
-        const noSavedElement: HTMLSpanElement = NoSavedMessage()
+        const noSavedElement = NoSavedMessage()
         savedProdtctsListElement.append( noSavedElement )
         return
     }
 
-    savedProductList.forEach( ( product: Product ) => {
+    savedProductList.forEach( ( product ) => {
         
         savedProdtctsListElement.append( ProductView( product ) )
     })
@@ -30,3 +30,25 @@ export function updateCartProductsCount(): void
     cartProductsCount.innerHTML              = getCartProductsCount().toString()
 }
 
+export function attachListenersToProductView( productViewElement: HTMLDivElement, product: Product )
+{
+    productViewElement.addEventListener( 'click', () => navigateToProduct( product ) ) 
+
+    const productObject = productViewElement.querySelector( 'object' )
+
+    productObject.addEventListener( 'load', () => { attachListenersToViewSvg( productObject, product ) } )
+}
+
+function navigateToProduct( product: Product )
+{
+    const productUrl = `/?id=${ product.id }`
+    window.location.href  = productUrl
+}
+
+function attachListenersToViewSvg( productObject: HTMLObjectElement, product: Product )
+{
+    const productSvg = productObject.contentDocument.querySelector( 'svg' )
+
+    productSvg.style.cursor = 'pointer'
+    productSvg.addEventListener( 'click', () => navigateToProduct( product ) )
+}

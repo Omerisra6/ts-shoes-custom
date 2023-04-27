@@ -214,6 +214,10 @@
     visibility: hidden;
 } 
 
+.product-view-image > svg{
+    cursor: pointer;
+}
+
 .no-products-text{
     padding: 1vh 0.5vw;
     font-size: var( --sm-font-size );

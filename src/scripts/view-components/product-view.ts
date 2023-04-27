@@ -1,3 +1,4 @@
+import { attachListenersToProductView } from "../components/header/header-helpers.js"
 import { AppProductsPath } from "../constants.js"
 import { Product } from "../products.js"
 
@@ -5,7 +6,6 @@ export const ProductView = ( product: Product ): HTMLDivElement => {
 
     const productViewElement: HTMLDivElement = document.createElement( "div" )
     productViewElement.classList.add( 'product-view' )
-    productViewElement.onclick = function(): void{ window.location.href  = `/?id=${ product.id }` }
     productViewElement.dataset.resultId = product.id
 
     productViewElement.innerHTML = `
@@ -20,6 +20,8 @@ export const ProductView = ( product: Product ): HTMLDivElement => {
 
         <span class="material-icons xs-icon choose-product-icon">arrow_forward_ios</span>
     `
+
+    attachListenersToProductView( productViewElement, product )
 
     return productViewElement
 }
