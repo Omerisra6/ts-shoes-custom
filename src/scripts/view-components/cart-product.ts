@@ -1,4 +1,4 @@
-import { CartProduct } from "../../products.js";
+import { CartProduct } from "../products.js";
 import { updateCartProductsCount } from "../components/header/header-helpers.js";
 import { removeCartProduct, updateCartProduct } from "../db-handlers.js";
 import { adjustQuantityValue } from "../helpers.js";

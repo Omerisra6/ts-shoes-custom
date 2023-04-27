@@ -1,4 +1,4 @@
-import { CartProduct } from "../../../products.js";
+import { CartProduct } from "../../products.js";
 import { attachHeaedrListeners } from "../../components/header/header.js";
 import { getCartProducts, totalPrice } from "../../db-handlers.js";
 import { _ } from "../../helpers.js";

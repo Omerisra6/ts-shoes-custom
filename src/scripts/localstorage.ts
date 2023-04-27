@@ -1,4 +1,4 @@
-import { CartProduct, Product } from "../products.js";
+import { CartProduct, Product } from "./products.js";
 import { getIndexByKey } from "./helpers.js";
 
 export function setLocalStorage( lcnName: string, lcValue: any ) 

@@ -1,4 +1,4 @@
-import { CartProduct, Product, productList } from "../products.js"
+import { CartProduct, Product, productList } from "./products.js"
 import { addCartProductToStorage, addProductToStorage, getLocalStorage, removeCartProductFromStorage, removeProductFromStorage, updateCartProductInStorage } from "./localstorage.js"
 
 export let totalPrice = getTotalPrice()

@@ -1,4 +1,4 @@
-import { Product } from "../../../products.js"
+import { Product } from "../../products.js"
 import { getCartProductsCount, getSavedProducts } from "../../db-handlers.js"
 import { _ } from "../../helpers.js"
 import { NoSavedMessage } from "../../view-components/no-saved-products-message.js"

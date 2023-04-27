@@ -1,11 +1,11 @@
-import { AppProductsPath } from "../../../constants.js"
-import { Product } from "../../products.js"
+import { AppProductsPath } from "../constants.js"
+import { Product } from "../products.js"
 
 export const ProductView = ( product: Product ): HTMLDivElement => {
 
     const productViewElement: HTMLDivElement = document.createElement( "div" )
     productViewElement.classList.add( 'product-view' )
-    productViewElement.onclick = function(): void{ window.location.href  = `/pages/product-customize.html?id=${ product.id }` }
+    productViewElement.onclick = function(): void{ window.location.href  = `/?id=${ product.id }` }
     productViewElement.dataset.resultId = product.id
 
     productViewElement.innerHTML = `

@@ -1,4 +1,4 @@
-import { CartProduct, Product } from "../../../products.js"
+import { CartProduct, Product } from "../../products.js"
 import { updateCartProductsCount, updateSavedProductsList } from "../../components/header/header-helpers.js"
 import { addCartProduct, addProduct, getSavedProduct, removeSavedProduct } from "../../db-handlers.js"
 import { _, _A, getSvgPathFillColors } from "../../helpers.js"

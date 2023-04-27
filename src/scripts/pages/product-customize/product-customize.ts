@@ -1,4 +1,4 @@
-import { Product } from "../../../products.js";
+import { Product } from "../../products.js";
 import { attachHeaedrListeners } from "../../components/header/header.js";
 import { getProduct } from "../../db-handlers.js";
 import { _, _A } from "../../helpers.js";

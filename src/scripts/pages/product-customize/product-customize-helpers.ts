@@ -1,5 +1,5 @@
-import { AppProductsPath } from "../../../../constants.js";
-import { Product } from "../../../products.js"
+import { AppProductsPath } from "../../constants.js";
+import { Product } from "../../products.js"
 import { getSavedProduct } from "../../db-handlers.js";
 import { getElementLabel, _, _A, selectFirstInput } from "../../helpers.js"
 import { attachListenersToStartOver, attachListenersToSvgPaths } from "./product-customize-listeners.js";

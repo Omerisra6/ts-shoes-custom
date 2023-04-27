@@ -1,4 +1,4 @@
-import { Product  } from "../../../products.js";
+import { Product  } from "../../products.js";
 import { searchProducts } from "../../db-handlers.js";
 import { debounce, _  } from "../../helpers.js"; 
 import { NoProductsMessage } from "../../view-components/no-product-found-message.js";
