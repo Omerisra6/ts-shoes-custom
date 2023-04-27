@@ -5,8 +5,8 @@ import { NoProductsMessage } from "../../view-components/no-product-found-messag
 import { ProductView } from "../../view-components/product-view.js";
 import { updateCartProductsCount, updateSavedProductsList } from "./header-helpers.js";
 
-const resultsContainer: HTMLDivElement     = _( '.search-results-container' )!
-const searchProductInput: HTMLInputElement = _( '.search-product-input' )!
+const resultsContainer   = _( '.search-results-container' )!
+const searchProductInput = _<HTMLInputElement>( '.search-product-input' )!
 
 export function attachHeaedrListeners( )
 {
@@ -23,7 +23,7 @@ function attachListenersToSearchInput()
 
 function searchInputOnChange() 
 {
-    const searchVal: string = searchProductInput.value    
+    const searchVal = searchProductInput.value    
     if ( ! searchVal )
     {
         resultsContainer.classList.add( 'invisible' )
@@ -40,7 +40,7 @@ function appendSearchResults( searchResults: Array< Product > )
 
     if( searchResults.length === 0 )
     {
-        const noProductsElement: HTMLDivElement = NoProductsMessage()
+        const noProductsElement = NoProductsMessage()
         resultsContainer.append( noProductsElement ) 
     }
 

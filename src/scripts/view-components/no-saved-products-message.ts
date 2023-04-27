@@ -1,10 +1,9 @@
 
-export const NoSavedMessage = ( ): HTMLSpanElement => {
+export const NoSavedMessage = ( ) => {
 
-    const noSavedElement: HTMLSpanElement = document.createElement( "span" )
+    const noSavedElement = document.createElement( "span" )
     noSavedElement.classList.add( 'no-saved-message' )
 
     noSavedElement.innerHTML = `No saved products`
-
     return noSavedElement
 }

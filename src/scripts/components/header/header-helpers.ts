@@ -6,10 +6,15 @@ import { ProductView } from "../../view-components/product-view.js"
 
 export function updateSavedProductsList()
 {
-    const savedProdtctsListElement: HTMLDivElement  = _( '.saved-products-list' )    
-    const savedProductList                          = getSavedProducts()
+    const savedProdtctsListElement = _( '.saved-products-list' )    
+    const savedProductList         = getSavedProducts()
     
-    savedProdtctsListElement.innerHTML              = ''
+    if ( ! savedProdtctsListElement ) 
+    {
+        return
+    }
+
+    savedProdtctsListElement.innerHTML = ''
 
     if ( savedProductList.length === 0 ) 
     {
@@ -24,30 +29,40 @@ export function updateSavedProductsList()
     })
 }
 
-export function updateCartProductsCount(): void
+export function updateCartProductsCount()
 {
-    const cartProductsCount: HTMLDivElement  = _( '.cart-products-count' )    
-    cartProductsCount.innerHTML              = getCartProductsCount().toString()
+    const cartProductsCount = _( '.cart-products-count' )    
+    if ( ! cartProductsCount ) 
+    {
+        return
+    }
+
+    cartProductsCount.innerHTML = getCartProductsCount().toString()
 }
 
 export function attachListenersToProductView( productViewElement: HTMLDivElement, product: Product )
 {
     productViewElement.addEventListener( 'click', () => navigateToProduct( product ) ) 
 
-    const productObject = productViewElement.querySelector( 'object' )
+    const productObject = productViewElement.querySelector<HTMLObjectElement>( 'object' )
 
-    productObject.addEventListener( 'load', () => { attachListenersToViewSvg( productObject, product ) } )
+    productObject?.addEventListener( 'load', () => { attachListenersToViewSvg( productObject, product ) } )
 }
 
 function navigateToProduct( product: Product )
 {
-    const productUrl = `/?id=${ product.id }`
+    const productUrl      = `/?id=${ product.id }`
     window.location.href  = productUrl
 }
 
 function attachListenersToViewSvg( productObject: HTMLObjectElement, product: Product )
 {
-    const productSvg = productObject.contentDocument.querySelector( 'svg' )
+    const productSvgDocument = productObject.contentDocument
+    const productSvg = productSvgDocument?.querySelector( 'svg' )
+    if ( ! productSvg ) 
+    {
+        return
+    }
 
     productSvg.style.cursor = 'pointer'
     productSvg.addEventListener( 'click', () => navigateToProduct( product ) )

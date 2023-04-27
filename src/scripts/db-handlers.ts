@@ -1,25 +1,26 @@
 import { CartProduct, Product, productList } from "./products.js"
-import { addCartProductToStorage, addProductToStorage, getLocalStorage, removeCartProductFromStorage, removeProductFromStorage, updateCartProductInStorage } from "./localstorage.js"
+import { addCartProductToStorage, addProductToStorage, removeCartProductFromStorage, removeProductFromStorage, updateCartProductInStorage } from "./localstorage.js"
 
 export let totalPrice = getTotalPrice()
 
-export const getProduct: Function = ( id: string ): Product|undefined => {
+export const getProduct = ( id: string ) => {
 
-    return productList.find( ( product: Product ) => { return product.id == id  }) as Product
+    return productList.find( ( product: Product ) => { return product.id == id  })
 }
 
-export const getSavedProduct = ( id: string ): Product|undefined => {
+export const getSavedProduct = ( id: string ) => {
 
-    const savedProductStorage: string            = getLocalStorage( 'saved_products' )
-    const savedProductList: Array< CartProduct > = savedProductStorage ? JSON.parse( savedProductStorage ) : []
+    const savedProductStorage = localStorage.getItem( 'saved_products' )
+    const savedProductList    = savedProductStorage ? JSON.parse( savedProductStorage ) : []
+
     return savedProductList.find( ( product: Product ) => { return product.id === id } )
 }
 
-export const searchProducts: Function = ( searchVal: string ): Array< Product > => {
+export const searchProducts = ( searchVal: string ): Array< Product > => {
 
-    return productList.filter( ( product: Product ) => {
+    return productList.filter( ( product ) => {
         
-        return Object.values( product ).some( ( productAttribute: any ) => {
+        return Object.values( product ).some( ( productAttribute ) => {
 
             if ( typeof productAttribute !== 'string' ) 
             {
@@ -28,27 +29,40 @@ export const searchProducts: Function = ( searchVal: string ): Array< Product > 
             
             return productAttribute.includes( searchVal ) 
         } )  
-    }) as Array<Product>
+    })
 }
 
-export const getCartProducts = (): Array< CartProduct > => {
+export const getCartProducts = () => {
 
-    const cartProductStorage: string            = getLocalStorage( 'cart_products' )
-    const cartProductList: Array< CartProduct > = cartProductStorage ? JSON.parse( cartProductStorage ) : []
+    const cartProductStorage = localStorage.getItem( 'cart_products' )
+    const cartProductList    = cartProductStorage ? JSON.parse( cartProductStorage ) : []
+
+    if ( ! ( cartProductList instanceof Array< CartProduct > ) ) 
+    {
+        return []  
+    }
+
     return cartProductList
 }
 
 export const getCartProductsCount = (): number => 
 {
-    const cartProductsArray: Array< CartProduct > = getCartProducts()    
-    const QuantityArray: Array< number >          = cartProductsArray.map( ( cartProduct ) => { return cartProduct.quantity ?? 1 } )
+    const cartProductsArray = getCartProducts()    
+    const QuantityArray     = cartProductsArray.map( ( cartProduct ) => { return cartProduct.quantity ?? 1 } )
+
     return QuantityArray.reduce( ( acc: number, val: number ) => acc + val, 0 );
 }
 
-export const getSavedProducts = (): Array< Product > => {
+export const getSavedProducts = () => {
 
-    const savedProductStorage: string            = getLocalStorage( 'saved_products' )
-    const savedProductList: Array< CartProduct > = savedProductStorage ? JSON.parse( savedProductStorage ) : []
+    const savedProductStorage = localStorage.getItem( 'saved_products' )
+    const savedProductList    = savedProductStorage ? JSON.parse( savedProductStorage ) : []
+
+    if ( ! ( savedProductList instanceof Array< CartProduct > ) ) 
+    {
+        return []  
+    }
+    
     return savedProductList
 }
 
@@ -69,14 +83,15 @@ export const addCartProduct = ( cartProduct: CartProduct ) => {
 }
 
 export const updateCartProduct = ( cartProduct: CartProduct ) => {
+
     updateCartProductInStorage( cartProduct )    
     totalPrice = getTotalPrice()
 }
 
-function getTotalPrice( ): number
+function getTotalPrice( )
 {
-    const cartProductsStorage: string           = getLocalStorage( 'cart_products' )
-    const productsArray: Array< CartProduct >   = cartProductsStorage ? JSON.parse( cartProductsStorage ) : []
+    const cartProductsStorage = localStorage.getItem( 'cart_products' )
+    const productsArray       = cartProductsStorage ? JSON.parse( cartProductsStorage ) : []
     
     return productsArray.reduce( ( sum: number, cartProduct: CartProduct ) => {
         

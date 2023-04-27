@@ -5,12 +5,22 @@ import { getElementLabel, _, _A, selectFirstInput } from "../../helpers.js"
 import { attachListenersToStartOver, attachListenersToSvgPaths } from "./product-customize-listeners.js";
 import { setCurrentProduct } from "./product-customize.js"
 
-export function loadProduct( product: Product ):void
-{
-    const { id, name, svgFileName }                = product
-    const productView: HTMLDivElement              = _( '.product' )!
-    const productName: HTMLElement                 = _( '.product-name' )!
-    const productSvgObject: HTMLObjectElement      = _( '#product-svg' )!
+export function loadProduct( product: Product|undefined )
+{   
+    if ( ! product ) 
+    {
+        return
+    }    
+
+    const { id, name, svgFileName }  = product
+    const productView                = _( '.product' )
+    const productName                = _( '.product-name' )
+    const productSvgObject           = _<HTMLObjectElement>( '#product-svg' )
+
+    if ( ! productView || ! productName || ! productSvgObject ) 
+    {
+        return
+    }
 
     productView.dataset.productId = id
     productName.innerHTML         = name
@@ -18,46 +28,50 @@ export function loadProduct( product: Product ):void
 
     setCurrentProduct( product )
 
-    const isProductSaved: boolean = getSavedProduct( product.id ) !== undefined
+    const isProductSaved = getSavedProduct( product.id ) !== undefined
     toggleSaveProductButtonView( isProductSaved )
     attachListenersToProduct()
 }
 
-function attachListenersToProduct(): void
+function attachListenersToProduct()
 {
     _( "#product-svg" )?.addEventListener( "load", function(){
 
-        const productSvgObject: HTMLObjectElement      = _( '#product-svg' )!
-        const productSvg                               = productSvgObject?.contentDocument;
-        const paths: NodeListOf<SVGPathElement>        = productSvg?.querySelectorAll( 'path' )!    
+        const productSvgObject = _<HTMLObjectElement>( '#product-svg' )!
+        const productSvg       = productSvgObject?.contentDocument;
+        const paths            = productSvg?.querySelectorAll( 'path' )!    
 
         attachListenersToSvgPaths( paths )
         attachListenersToStartOver( paths )       
     })
 }
 
-export function toggleSaveProductButtonView( isSaved: boolean ): void
+export function toggleSaveProductButtonView( isSaved: boolean )
 {
     const saveProductButton = _( '.save-product-button' )
     const saveProductText   = _( '.save-product-text' )
-
+    if ( ! saveProductButton || ! saveProductText ) 
+    {
+        return    
+    }
+    
     saveProductButton.classList.toggle( 'product-saved', isSaved )
     saveProductText.innerHTML = isSaved ? 'UNSAVE' : 'SAVE'
 }
 
 export function checkSelectedColor()
 {
-    const colorContainers: NodeListOf<HTMLElement> = _A( '.color-selector-input' )! 
-    const selectedColorInput: HTMLInputElement     = _( 'input[name="color"]:checked' )!
+    const colorContainers    = _A( '.color-selector-input' )
+    const selectedColorInput = _( 'input[name="color"]:checked' )
     
-    colorContainers.forEach( ( colorContainer: HTMLElement ) => { 
+    colorContainers.forEach( ( colorContainer ) => { 
 
         const inputLabel = getElementLabel( colorContainer )            
-        inputLabel.classList.remove( 'checked' )
+        inputLabel?.classList.remove( 'checked' )
     })
     
-    const selectedInputLabel = _( `label[for='${selectedColorInput.id}']` )
-    selectedInputLabel.classList.add( 'checked' )
+    const selectedInputLabel = _( `label[for='${selectedColorInput?.id}']` )
+    selectedInputLabel?.classList.add( 'checked' )
 }
 
 export function toggleColorMenu( event: Event )
@@ -67,11 +81,21 @@ export function toggleColorMenu( event: Event )
         return
     }
 
-    const currentOption: HTMLDivElement          = ( event.currentTarget as HTMLDivElement )
-    const colorMenu: HTMLDivElement              = _( '.color-types-list' )
-    const colorOptions: Array< HTMLDivElement >  = [ ...colorMenu.children  ] as Array< HTMLDivElement >
+    const currentOption = event.currentTarget
+    const colorMenu     = _( '.color-types-list' )
+    if ( ! colorMenu ) 
+    {
+        return    
+    }
 
-    colorOptions.forEach( ( colorOption: HTMLDivElement ) => {
+    const colorOptions = [ ...colorMenu.children  ]
+
+    colorOptions.forEach( ( colorOption ) => {
+
+        if ( ! ( colorOption  instanceof HTMLDivElement ) ) 
+        {
+            return    
+        }
 
         setOptionView( colorOption, currentOption )
     })    
@@ -79,15 +103,15 @@ export function toggleColorMenu( event: Event )
 
 function setOptionView( colorOption: HTMLDivElement, currentOption: HTMLDivElement )
 {
-    const isSelectedOption: boolean = colorOption == currentOption 
+    const isSelectedOption = colorOption == currentOption 
     colorOption.classList.toggle( 'selected-color-option', isSelectedOption )
 
-    const colorOptionId: string            = colorOption.id
-    const colorOptionField: HTMLDivElement = _( `div[for="${ colorOptionId }"]` )
+    const colorOptionId    = colorOption.id
+    const colorOptionField = _( `div[for="${ colorOptionId }"]` )
     
-    colorOptionField.classList.toggle( 'none', ! isSelectedOption )
+    colorOptionField?.classList.toggle( 'none', ! isSelectedOption )
 
-    if ( ! isSelectedOption ) 
+    if ( ! isSelectedOption || ! colorOptionField ) 
     {
         return
     }
@@ -98,6 +122,11 @@ function setOptionView( colorOption: HTMLDivElement, currentOption: HTMLDivEleme
 
 export function selectFirstColorInput( ) 
 {
-    const firstColorList: HTMLDivElement = _( '[for="solid-colors-option"]')    
+    const firstColorList = _( '[for="solid-colors-option"]')    
+    if ( ! firstColorList ) 
+    {
+        return    
+    }
+    
     selectFirstInput( firstColorList )
 }

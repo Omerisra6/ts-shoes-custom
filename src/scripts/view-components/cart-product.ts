@@ -88,7 +88,7 @@ function attachListenerToMinusButton( cartProductElement: HTMLDivElement, cartPr
     const cartProductQuantityInput = cartProductElement.querySelector( '.quantity-input' ) as HTMLInputElement
     const cartProductQuantityMinus = cartProductElement.querySelector( '.minus-quntity-button' )
 
-    cartProductQuantityMinus.addEventListener( 'click', () => { 
+    cartProductQuantityMinus?.addEventListener( 'click', () => { 
 
         if ( cartProductQuantityInput.value === '1' ) 
         {   
@@ -111,7 +111,7 @@ function attachListenerToPlusButton( cartProductElement: HTMLDivElement, cartPro
     const cartProductQuantityInput = cartProductElement.querySelector( '.quantity-input' ) as HTMLInputElement
     const cartProductQuantityPlus  = cartProductElement.querySelector( '.plus-quntity-button' )
 
-    cartProductQuantityPlus.addEventListener( 'click', () => { 
+    cartProductQuantityPlus?.addEventListener( 'click', () => { 
 
         adjustQuantityValue( cartProductQuantityInput, 1  ) 
         cartProduct.quantity = parseInt( cartProductQuantityInput.value )

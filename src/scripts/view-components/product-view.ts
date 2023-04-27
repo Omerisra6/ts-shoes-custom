@@ -2,9 +2,10 @@ import { attachListenersToProductView } from "../components/header/header-helper
 import { AppProductsPath } from "../constants.js"
 import { Product } from "../products.js"
 
-export const ProductView = ( product: Product ): HTMLDivElement => {
+export const ProductView = ( product: Product ) => {
 
-    const productViewElement: HTMLDivElement = document.createElement( "div" )
+    const productViewElement = document.createElement( "div" )
+    
     productViewElement.classList.add( 'product-view' )
     productViewElement.dataset.resultId = product.id
 

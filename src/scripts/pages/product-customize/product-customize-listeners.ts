@@ -1,16 +1,16 @@
-import { CartProduct, Product } from "../../products.js"
 import { updateCartProductsCount, updateSavedProductsList } from "../../components/header/header-helpers.js"
 import { addCartProduct, addProduct, getSavedProduct, removeSavedProduct } from "../../db-handlers.js"
-import { _, _A, getSvgPathFillColors } from "../../helpers.js"
+import { _, _A, getSVGFromObject, getSvgPathFillColors } from "../../helpers.js"
 import { currentProduct } from "./product-customize.js"
 import { checkSelectedColor, toggleColorMenu, toggleSaveProductButtonView } from "./product-customize-helpers.js"
 
 export function attachListenersToSaveProduct(  ) 
 {
-    const saveProductButton: HTMLDivElement = _( '.save-product-button' )
-    saveProductButton.addEventListener( 'click', () => { 
+    const saveProductButton = _( '.save-product-button' )
 
-        const savedProduct: Product|undefined = getSavedProduct( currentProduct.id )
+    saveProductButton?.addEventListener( 'click', () => { 
+
+        const savedProduct = getSavedProduct( currentProduct.id )
 
         if ( savedProduct !== undefined ) 
         {            
@@ -28,9 +28,9 @@ export function attachListenersToSaveProduct(  )
 
 export function attachListenersToColorContainers()
 {
-    const colorContainers: NodeListOf<HTMLElement> = _A( '.color-selector-input' )! 
+    const colorContainers = _A( '.color-selector-input' )! 
 
-    colorContainers.forEach( ( colorContainer: HTMLElement ) => {
+    colorContainers.forEach( ( colorContainer ) => {
 
         colorContainer.addEventListener( 'click', ( event ) => {
     
@@ -46,16 +46,28 @@ export function attachListenersToColorContainers()
 
 export function attachListenersToCartButton()
 {
-    const addToCartButton: HTMLDivElement   = _( '.add-to-bag-button' )
+    const addToCartButton = _( '.add-to-bag-button' )
+    if ( ! addToCartButton ) 
+    {
+        return
+    }
 
     addToCartButton.addEventListener( 'click', () =>{
 
-        const productSvgObject: HTMLObjectElement =  _( '#product-svg' )
-        const productSvgDocument: Document        =  productSvgObject.contentDocument
-        const productSvg: SVGElement              = productSvgDocument.querySelector( 'svg' )
-        const productSvgString: string            = productSvg.outerHTML
-        
-        const productWithCustomize: CartProduct =  
+        const productSvgObject = _<HTMLObjectElement>( '#product-svg' )
+        if ( ! productSvgObject ) 
+        {
+            return
+        }
+
+        const productSvg       = getSVGFromObject( productSvgObject )
+        const productSvgString = productSvg?.outerHTML 
+        if ( ! productSvgString ) 
+        {
+            return
+        }
+
+        const productWithCustomize =  
         {
             ...currentProduct,
             customization: productSvgString,
@@ -68,51 +80,54 @@ export function attachListenersToCartButton()
 
 export function attachListenersToColorOptions()
 {
-    const colorMenu: HTMLDivElement         = _( '.color-types-list' )
-    const colorOptions: Array< Element >    = [ ...colorMenu.children ]
+    const colorMenu  = _( '.color-types-list' )
+    if ( ! colorMenu  ) 
+    {
+        return
+    }
+    
+    const colorOptions = [ ...colorMenu.children ]
+    colorOptions.forEach( ( colorOption ) => {
 
-    colorOptions.forEach( ( colorOption: Element ) => {
-
-        colorOption.addEventListener( 'click', ( e: Event ) => {
-
-            toggleColorMenu( e )
-        })
+        colorOption.addEventListener( 'click', ( e ) => { toggleColorMenu( e ) })
     })
 }
 
 export function attachListenersToOwnColorLabel()
 {
-    const ownColorLabel: HTMLLabelElement   = _( '.own-color-label' )
-    const ownColorInput: HTMLInputElement   = _ ( '.own-color-input' )
+    const ownColorLabel = _( '.own-color-label' )
+    const ownColorInput = _( '.own-color-input' )
 
-    ownColorLabel.addEventListener( 'click', () => {
-
-        ownColorInput.click()
-    })
+    ownColorLabel?.addEventListener( 'click', () => { ownColorInput?.click() })
 }
 
 export function attachListenersToOwnColorInput()
 {
-    const ownColorLabel: HTMLLabelElement        = _( '.own-color-label' )
-    const ownColorInput: HTMLInputElement        = _ ( '.own-color-input' )
-    const ownColorRadioInput: HTMLInputElement   = _ ( '.own-radio-input' )
+    const ownColorLabel      = _<HTMLLabelElement>( '.own-color-label' )
+    const ownColorInput      = _<HTMLInputElement>( '.own-color-input' )
+    const ownColorRadioInput = _<HTMLInputElement>( '.own-radio-input' )
 
-    ownColorInput.addEventListener( 'change', () => {
+    if ( ! ownColorLabel || ! ownColorInput || ! ownColorRadioInput) 
+    {
+        return    
+    }
+    
+    ownColorInput?.addEventListener( 'change', () => {
 
-        ownColorRadioInput.value = ownColorInput.value 
-        ownColorRadioInput.id    = ownColorInput.value 
-        ownColorLabel.htmlFor    = ownColorInput.value 
-        ownColorLabel.style.backgroundColor     =  ownColorInput.value
+        ownColorRadioInput.value            = ownColorInput?.value 
+        ownColorRadioInput.id               = ownColorInput?.value 
+        ownColorLabel.htmlFor               = ownColorInput?.value 
+        ownColorLabel.style.backgroundColor = ownColorInput?.value
      })    
 }
 
 export function attachListenersToSvgPaths( paths: NodeListOf<SVGPathElement> )
 {
-    paths?.forEach( ( path: SVGPathElement ) =>{
+    paths.forEach( ( path ) =>{
 
         path.addEventListener( 'click', () => {
 
-            let selectedColorInput: HTMLInputElement = _( 'input[name="color"]:checked' )!
+            let selectedColorInput = _<HTMLInputElement>( 'input[name="color"]:checked' )!
             path.setAttribute( 'style', `fill: ${ selectedColorInput?.value }` )
         })
     });
@@ -120,10 +135,10 @@ export function attachListenersToSvgPaths( paths: NodeListOf<SVGPathElement> )
 
 export function attachListenersToStartOver( paths: NodeListOf<SVGPathElement> )
 {
-    const startOverIcon: HTMLElement = _( '.start-over-icon' )!
-    const pathOriginalColors: Array<string> = getSvgPathFillColors( paths )
+    const startOverIcon       = _( '.start-over-icon' )!
+    const pathOriginalColors  = getSvgPathFillColors( paths )
 
-    startOverIcon?.addEventListener( 'click', () => {
+    startOverIcon.addEventListener( 'click', () => {
 
         restartPathFillColors( paths, pathOriginalColors )
     })
@@ -131,10 +146,8 @@ export function attachListenersToStartOver( paths: NodeListOf<SVGPathElement> )
 
 function restartPathFillColors( paths: NodeListOf<SVGPathElement>, pathOriginalColors: Array< string > )
 {
-   
-
     paths?.forEach( ( path: SVGPathElement, index: number ) => {
 
-        path.setAttribute( 'style', `fill: ${pathOriginalColors[ index ]}`  )
+        path.setAttribute( 'style', `fill: ${ pathOriginalColors[ index ] }` )
     });
 }

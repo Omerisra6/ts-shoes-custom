@@ -1,40 +1,42 @@
-export function _( selector: any ): any
+
+export function _<T extends HTMLElement>(selector: string)
 {
-  return document.querySelector( selector )
+  return document.querySelector<T>(selector)
 }
 
-export function _A( selector: any): NodeListOf<any>|null
+export function _A<T extends HTMLElement>(selector: string)
 {
-  return document.querySelectorAll( selector )
+  return document.querySelectorAll<T>(selector)
 }
 
-export function getElementLabel( element: HTMLElement ): HTMLElement
+
+export function getElementLabel( element: HTMLElement )
 {
-  const containerId: string     = element.id
-  const inputLabel: HTMLElement = _( `label[for='${ containerId }']`)   
-  return inputLabel
+  const containerId  = element.id
+  const elementLabel = _( `label[for='${ containerId }']`)   
+  return elementLabel
 }
 
-export const debounce = (fn: Function, ms = 300) => {
+export const debounce = ( fn: Function, ms = 300 ) => {
 
-  let timeoutId: ReturnType<typeof setTimeout>;
-  return function (this: any, ...args: any[]) 
+  let timeoutId: ReturnType<typeof setTimeout>
+  return function ( this: any, ...args: any[] ) 
   {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn.apply(this, args), ms);
-  };
-};
+    clearTimeout( timeoutId );
+    timeoutId = setTimeout( () => fn.apply( this, args ), ms );
+  }
+}
 
 export function adjustQuantityValue( inputElement: HTMLInputElement, adjustment: number )
 {
-  let numberValue: number      = inputElement.valueAsNumber + adjustment
-  const inputMinNumber: number = parseInt( inputElement.min )
-  const inputMaxNumber: number = parseInt( inputElement.max )
+  let numberValue      = inputElement.valueAsNumber + adjustment
+  const inputMinNumber = parseInt( inputElement.min )
+  const inputMaxNumber = parseInt( inputElement.max )
 
   numberValue = numberValue < inputMinNumber ? inputMinNumber : numberValue
   numberValue = numberValue > inputMaxNumber ? inputMaxNumber : numberValue
 
-  inputElement.value         = numberValue.toString()
+  inputElement.value = numberValue.toString()
 }
 
 export function countObjectsWithAttribute( arr: Array< { [ key: string] : any } >, key: string, value: any ) 
@@ -60,8 +62,8 @@ export function getIndexByKey( arr: Array< { [ key: string] : any } >, key: stri
   
 export function selectFirstInput( inputsContainer: Element )
 {
-  const colorInputs: NodeListOf<Element>  = inputsContainer.querySelectorAll( 'input[name="color"]' )    
-  const firstColorInput: HTMLInputElement = ( colorInputs[ 0 ] as HTMLInputElement )
+  const colorInputs     = inputsContainer.querySelectorAll( 'input[name="color"]' )    
+  const firstColorInput = ( colorInputs[ 0 ] as HTMLInputElement )
   
   firstColorInput.checked = true    
 }
@@ -69,4 +71,11 @@ export function selectFirstInput( inputsContainer: Element )
 export function getSvgPathFillColors( paths: NodeListOf<SVGPathElement> ): Array< string >
 {
   return [ ...paths ].map( ( path: SVGPathElement ) =>{ return path.getAttribute( 'fill' )! })
+}
+
+export function getSVGFromObject( ObjectElement: HTMLObjectElement )
+{
+  const svgDocument = ObjectElement.contentDocument
+
+  return svgDocument?.querySelector<SVGAElement>( 'svg' )
 }

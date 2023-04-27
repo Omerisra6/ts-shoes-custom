@@ -17,10 +17,10 @@ loadProduct( getCurrentProduct() )
 selectFirstColorInput()
 attachProductCustomizeListener()
 
-function getCurrentProduct( ):Product 
+function getCurrentProduct( )
 {
-    const url: URL = new URL( window.location.href )    
-    const currentProductId: number = url.searchParams.get( 'id' ) ? parseInt( url.searchParams.get( 'id' ) ) : 1
+    const url = new URL( window.location.href )    
+    const currentProductId = url.searchParams.get( 'id' ) ?? '1'
 
     return getProduct( currentProductId )
 }
