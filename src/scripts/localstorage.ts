@@ -87,9 +87,9 @@ function getSameCustomCount( productsArray: Array< CartProduct >, newProduct: Ca
 {
     return productsArray.reduce( ( quantity, cartProduct ) => {
 
-        if ( cartProduct.customization === newProduct.customization && !! quantity ) 
+        if ( cartProduct.customization === newProduct.customization && cartProduct.quantity ) 
         {
-            quantity = quantity ?? cartProduct.quantity
+            quantity = cartProduct.quantity
         }
 
         return quantity
