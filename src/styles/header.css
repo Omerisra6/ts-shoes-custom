@@ -334,8 +334,9 @@
     }
 
     .cart-products-count{
-        width: 1vw;
-        height: 1vw;
+        width: 5px;
+        height: 5px;
+        font-size: var( --xxs-font-size );
     }
 
     .profile-border{
@@ -357,11 +358,10 @@
     }
 
     .search-product-input{
-        width: 5vw;
         font-size:  var( --xs-font-size );
     }
 
-    .cart-products-count{
-        font-size: var( --xxs-font-size );
+    .navigation li:last-child{
+        display: none;
     }
 }
