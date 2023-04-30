@@ -5,6 +5,7 @@
     width: 100%;
     height: 10vh;
     position: sticky;
+    z-index: 99;
 }
 
 .left-header{
@@ -364,5 +365,22 @@
 
     .navigation li:last-child{
         display: none;
+    }
+
+    .search-results-container{
+        top: 3.25vh;
+    }
+
+    .saved-products-list::after{
+        padding: 0.5vh 5vw;
+        left: 5vw;
+    }
+
+    .saved-products-list{
+        width: 20vw;
+    }
+
+    .saved-products-list > .product-view{
+        width: 18vw
     }
 }
