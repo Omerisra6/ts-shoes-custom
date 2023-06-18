@@ -319,8 +319,9 @@ object{
 }
 
 .own-color-input {
-    width: 1px;
-    height: 1px;
+    width: 0;
+    height: 0;
+    visibility: hidden;
     position: absolute;
 }
 

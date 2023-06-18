@@ -98,7 +98,7 @@ export function attachListenersToOwnColorLabel()
     const ownColorLabel = _( '.own-color-label' )
     const ownColorInput = _( '.own-color-input' )
 
-    ownColorLabel?.addEventListener( 'click', () => {  ownColorInput?.dispatchEvent(new MouseEvent('click')); })
+    ownColorLabel?.addEventListener( 'click', () => { ownColorInput?.click() })
 }
 
 export function attachListenersToOwnColorInput()
