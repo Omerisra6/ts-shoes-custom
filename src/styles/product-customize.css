@@ -318,6 +318,13 @@ object{
     border-bottom: 1px solid var( --light-orange );
 }
 
+.own-color-input {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
 @media screen and (max-width: 800px) {
     html{
         height: 100vh;
