@@ -47,7 +47,7 @@
     visibility:hidden;
     transition: 0.7s width ease, 0.7s visibility ease;
     position: absolute;
-    bottom: -0.7vh;
+    bottom: -0.2vh;
 }
 
 .nav-button:hover::after{
